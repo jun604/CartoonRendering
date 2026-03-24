@@ -5,7 +5,7 @@ import numpy as np
 sample_img = ['Sample.png','cityB.jpg','cityD.webp','cloud.jpg','refl.jpg','sea.jpg','winter.png','yellow.jpg','aladdin.jpg','hitman.jpg']
 
 #이미지 선택
-img_select = 0
+img_select = 9
 
 img = cv.imread(sample_img[img_select])
 assert img is not None, 'Cannot read the given image, ' + sample_img[img_select]
@@ -58,7 +58,7 @@ cv.imshow('Canny Edge2: origin', merge2)
 # 색상 반전 (Bitwise NOT 연산)
 edges = cv.bitwise_not(edge)
 # 이미지 색감 뭉개지게 하기 (Bilateral Filter)
-color = cv.bilateralFilter(img, 9, 10, 10)
+color = cv.bilateralFilter(img, 9, 75, 75)
 # Combine the color image with the edges mask
 cartoon = cv.bitwise_and(color, color, mask=edges)
 
