@@ -10,6 +10,8 @@ img_select = 0
 img = cv.imread(sample_img[img_select])
 assert img is not None, 'Cannot read the given image, ' + sample_img[img_select]
 
+
+    #이미지 전처리
 # 가로를 600px로 고정하고 세로 비율 유지
 target_width = 600
 aspect_ratio = img.shape[0] / img.shape[1] # 세로/가로 비율
@@ -18,8 +20,6 @@ target_height = int(target_width * aspect_ratio)
 dim = (target_width, target_height)
 img = cv.resize(img, dim, interpolation=cv.INTER_AREA)
 
-
-    #이미지 전처리
 # Convert the image to grayscale
 img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 # Apply histogram equalization
@@ -40,7 +40,7 @@ img1 = img_tran
 img2 = img_gray
 
 
-#엣지 검출
+    #엣지 검출
 # Get the Canny edge image
 edge1 = cv.Canny(img1, threshold11, threshold12, apertureSize=aperture_size)
 edge2 = cv.Canny(img2, threshold21, threshold22, apertureSize=aperture_size)
@@ -54,7 +54,7 @@ cv.imshow('Canny Edge1: hist', merge1)
 cv.imshow('Canny Edge2: origin', merge2)
 
 
-#이미지 합성
+    #이미지 합성
 # 색상 반전 (Bitwise NOT 연산)
 edges = cv.bitwise_not(edge)
 # 이미지 색감 뭉개지게 하기 (Bilateral Filter)
